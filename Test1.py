@@ -13,18 +13,6 @@ from test import Ui_Screen2
 
 class Ui_Screen1(object):
 
-    def __init__(self):
-        pass
-
-    # def openSecondW(self):
-    #
-    #     self.window = QtWidgets.QMainWindow()
-    #     self.ui = Ui_Screen2()
-    #     self.ui.setupUi(self.window)
-    #     self.window.show()
-    #     Screen1.close()
-
-
     def setupUi(self, Screen1):
         Screen1.setObjectName("Screen1")
         Screen1.resize(300, 400)
@@ -37,17 +25,14 @@ class Ui_Screen1(object):
         self.pushButton.setObjectName("pushButton")
 
 #        self.pushButton.clicked.connect(self.openSecondW)
-
-
-
-        Screen1.setCentralWidget(self.centralwidget)
+#         Screen1.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Screen1)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 300, 26))
         self.menubar.setObjectName("menubar")
-        Screen1.setMenuBar(self.menubar)
+        # Screen1.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(Screen1)
         self.statusbar.setObjectName("statusbar")
-        Screen1.setStatusBar(self.statusbar)
+        # Screen1.setStatusBar(self.statusbar)
 
         self.retranslateUi(Screen1)
         QtCore.QMetaObject.connectSlotsByName(Screen1)

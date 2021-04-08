@@ -1,38 +1,40 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from test import Ui_Screen2
 from Test1 import Ui_Screen1
+from test import Ui_Screen2
 import sys
 
-class WindowsController:
+
+
+class Screen_1(QtWidgets.QWidget, Ui_Screen1):
+
     def __init__(self):
-        pass
+        QtWidgets.QWidget.__init__(self)
+        self.setupUi(self)
 
-    def showScreen1(self):
-        # self.screen1 = Ui_Screen1()
-        # self.screen1.show()
-        Screen1 = QtWidgets.QMainWindow()
-        self.ui = Ui_Screen1()
-        self.ui.setupUi(Screen1)
-        Screen1.show()
+        self.pushButton.clicked.connect(self.pushbutton_handler)
 
+    def pushbutton_handler(self):
+        widget.setCurrentIndex(widget.currentIndex()+1)
 
+class Screen_2(QtWidgets.QWidget, Ui_Screen2):
 
+    def __init__(self):
+        QtWidgets.QWidget.__init__(self)
+        self.setupUi(self)
 
-def main():
-    app = QtWidgets.QApplication(sys.argv)
-    controller = WindowsController()
-    controller.showScreen1()
+        self.pushButton.clicked.connect(self.pushbutton_handler)
 
-    '''
-    app = QtWidgets.QApplication(sys.argv)
-    Screen1 = QtWidgets.QMainWindow()
-    ui = Ui_Screen1()
-    ui.setupUi(Screen1)
-    Screen1.show()
-    sys.exit(app.exec_())
-    '''
+    def pushbutton_handler(self):
+        widget.setCurrentIndex(widget.currentIndex() - 1)
 
 
-
-if __name__ == "__main__":
-  main()
+app = QtWidgets.QApplication(sys.argv)
+widget = QtWidgets.QStackedWidget()
+screen1 = Screen_1()
+screen2 = Screen_2()
+widget.addWidget(screen1)
+widget.addWidget(screen2)
+widget.setFixedHeight(400)
+widget.setFixedWidth(300)
+widget.show()
+sys.exit(app.exec_())
