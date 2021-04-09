@@ -23,14 +23,14 @@ class Ui_Screen2(object):
         self.pushButton.setGeometry(QtCore.QRect(90, 140, 131, 51))
         self.pushButton.setObjectName("pushButton")
 
-        # Screen2.setCentralWidget(self.centralwidget)
+        Screen2.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Screen2)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 300, 26))
         self.menubar.setObjectName("menubar")
-        # Screen2.setMenuBar(self.menubar)
+        Screen2.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(Screen2)
         self.statusbar.setObjectName("statusbar")
-        # Screen2.setStatusBar(self.statusbar)
+        Screen2.setStatusBar(self.statusbar)
 
         self.retranslateUi(Screen2)
         QtCore.QMetaObject.connectSlotsByName(Screen2)
