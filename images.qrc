@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="arrows">
+    <file>186407-512.png</file>
+    <file>186411-512.png</file>
+    <file>button.png</file>
+    <file>iconfinder_arrow-up-01_186407.png</file>
+  </qresource>
+</RCC>
