@@ -374,7 +374,7 @@ class Ui_Config_Window(object):
         self.label_6.setText(_translate("Config_Window", "Number of Measurements"))
         self.Run_Btn.setText(_translate("Config_Window", "Run"))
         self.Back_Btn.setText(_translate("Config_Window", "Back"))
-import images_rc
+import images
 
 
 if __name__ == "__main__":

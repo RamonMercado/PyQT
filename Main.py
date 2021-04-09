@@ -1,40 +1,68 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Test1 import Ui_Screen1
-from test import Ui_Screen2
+from MainScreen import Ui_Menu_Window
+from SensorScreen import Ui_Config_Window
 import sys
 
 
-
-class Screen_1(QtWidgets.QWidget, Ui_Screen1):
-
-    def __init__(self):
-        QtWidgets.QWidget.__init__(self)
-        self.setupUi(self)
-
-        self.pushButton.clicked.connect(self.pushbutton_handler)
-
-    def pushbutton_handler(self):
-        widget.setCurrentIndex(widget.currentIndex()+1)
-
-class Screen_2(QtWidgets.QWidget, Ui_Screen2):
+class MainScreen(QtWidgets.QMainWindow, Ui_Menu_Window):
 
     def __init__(self):
-        QtWidgets.QWidget.__init__(self)
+        super(MainScreen, self).__init__()
+        self.setupUi(self)
+        self.SLP_Btn.clicked.connect(self.slp_button_handler)
+        self.DLP_Btn.clicked.connect(self.dlp_button_handler)
+        self.HEA_Btn.clicked.connect(self.hea_button_handler)
+
+    def slp_button_handler(self):
+        sensor_screen = SensorScreen('SLP')
+        widget.addWidget(sensor_screen)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
+    def dlp_button_handler(self):
+        sensor_screen = SensorScreen('DLP')
+        widget.addWidget(sensor_screen)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
+    def hea_button_handler(self):
+        sensor_screen = SensorScreen('HEA')
+        widget.addWidget(sensor_screen)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
+
+class SensorScreen(QtWidgets.QMainWindow, Ui_Config_Window):
+
+    def __init__(self, sensor_name):
+        super(SensorScreen, self).__init__()
+        self.name = sensor_name
         self.setupUi(self)
 
-        self.pushButton.clicked.connect(self.pushbutton_handler)
+        if self.name == 'SLP':
+            text = "Single Langmuir Probe"
+        elif self.name == 'DLP':
+            text = 'Double Langmuir Probe'
+        elif self.name == 'HEA':
+            text = 'Hyperbolic Energy Analyzer'
 
-    def pushbutton_handler(self):
+        self.ProbeName_label.setText(text)
+
+        self.Back_Btn.clicked.connect(self.back_button_handler)
+        self.Run_Btn.clicked.connect(self.run_button_handler)
+
+    def back_button_handler(self):
+        w = widget.currentWidget()
         widget.setCurrentIndex(widget.currentIndex() - 1)
+        widget.removeWidget(w)
+
+    def run_button_handler(self):
+        pass
 
 
-app = QtWidgets.QApplication(sys.argv)
-widget = QtWidgets.QStackedWidget()
-screen1 = Screen_1()
-screen2 = Screen_2()
-widget.addWidget(screen1)
-widget.addWidget(screen2)
-widget.setFixedHeight(400)
-widget.setFixedWidth(300)
-widget.show()
-sys.exit(app.exec_())
+if __name__ == '__main__':
+    app = QtWidgets.QApplication(sys.argv)
+    widget = QtWidgets.QStackedWidget()
+    main_screen = MainScreen()
+    widget.addWidget(main_screen)
+    widget.setFixedHeight(480)
+    widget.setFixedWidth(800)
+    widget.show()
+    sys.exit(app.exec_())
