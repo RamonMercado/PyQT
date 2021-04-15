@@ -1,3 +1,4 @@
+import numpy
 from PyQt5 import QtCore, QtGui, QtWidgets
 from MainScreen import Ui_Menu_Window
 from SensorScreen import Ui_Config_Window
@@ -48,11 +49,55 @@ class SensorScreen(QtWidgets.QMainWindow, Ui_Config_Window):
         self.Back_Btn.clicked.connect(self.back_button_handler)
         self.Run_Btn.clicked.connect(self.run_button_handler)
 
+    # Increase the number of measurements
+    # Maximum number of measurements is 1000
+    def IncreaseNumberOfMeasurements(self):
+        if self.numberMeasurements < 1000:
+            self.numberMeasurements += 50
+            self.NumMeasurments_textBrowser.setText(self.numberMeasurements)
+
+    # Decrease the number of measurements
+    # Minimum number of measurements is 50
+    def DecreaseNumberOfMeasurements(self):
+        if self.numberMeasurements > 50:
+            self.numberMeasurements -= 50
+            self.NumMeasurments_textBrowser.setText(self.numberMeasurements)
+
+    # Maximum Sweep Time is 10
+    # Range 0.05 - 0.25 Increments by 0.05
+    # Range 0.25 - 10.0 Increments by 0.25
+    def IncreaseSweepTime(self):
+
+        if 0.25 <= self.sweepTime < 10:
+            self.sweepTime += 0.25
+
+        elif self.sweepTime < 0.25:
+            self.sweepTime += 0.05
+
+        self.sweepTime = numpy.round(self.sweepTime, 2)
+        self.sweepTimeLCD.display('%.2f' % self.sweepTime)
+
+    # Minimum Sweep Time is 0.05
+    # Range 0.05 - 0.25 Decrease by 0.05
+    # Range 0.25 - 10.0 Decrease by 0.25
+    def DecreaseSweepTime(self):
+
+        if self.sweepTime > 0.25:
+            self.sweepTime -= 0.25
+
+        elif self.sweepTime > 0.05:
+            self.sweepTime -= 0.05
+
+        self.sweepTime = numpy.round(self.sweepTime, 2)
+        self.sweepTimeLCD.display('%.2f' % self.sweepTime)
+
+    # Returns to main window
     def back_button_handler(self):
         w = widget.currentWidget()
         widget.setCurrentIndex(widget.currentIndex() - 1)
         widget.removeWidget(w)
 
+    # Executes measurement
     def run_button_handler(self):
         pass
 
