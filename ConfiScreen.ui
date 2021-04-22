@@ -77,11 +77,17 @@
    <widget class="QComboBox" name="Gas_comboBox">
     <property name="geometry">
      <rect>
-      <x>540</x>
+      <x>580</x>
       <y>160</y>
       <width>151</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="focusPolicy">
      <enum>Qt::NoFocus</enum>
@@ -96,15 +102,43 @@
      <string notr="true">background-color: rgb(255, 255, 255);
 </string>
     </property>
+    <item>
+     <property name="text">
+      <string>Oxygen</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Helium</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Argon</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Hydrogen</string>
+     </property>
+    </item>
    </widget>
    <widget class="QComboBox" name="MagneticField_comboBox">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>70</x>
       <y>160</y>
       <width>151</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
+     </font>
     </property>
     <property name="focusPolicy">
      <enum>Qt::NoFocus</enum>
@@ -113,22 +147,88 @@
      <string notr="true">
 background-color: rgb(255, 255, 255);</string>
     </property>
+    <item>
+     <property name="text">
+      <string>Cusp</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Mirror</string>
+     </property>
+    </item>
    </widget>
-   <widget class="QComboBox" name="VoltageRange_comboBox">
+   <widget class="QComboBox" name="VoltageRangeMinus_comboBox">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>260</x>
       <y>160</y>
-      <width>151</width>
+      <width>121</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="focusPolicy">
      <enum>Qt::NoFocus</enum>
     </property>
+    <property name="layoutDirection">
+     <enum>Qt::LeftToRight</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhNone</set>
+    </property>
+    <property name="editable">
+     <bool>false</bool>
+    </property>
+    <property name="currentText">
+     <string/>
+    </property>
+    <property name="currentIndex">
+     <number>-1</number>
+    </property>
+    <item>
+     <property name="text">
+      <string>-300</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>-250</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>-200</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>-150</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>-100</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>-50</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </item>
    </widget>
    <widget class="Line" name="line">
     <property name="geometry">
@@ -729,7 +829,7 @@ background-color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="MagField_Label">
     <property name="geometry">
      <rect>
-      <x>70</x>
+      <x>40</x>
       <y>130</y>
       <width>211</width>
       <height>21</height>
@@ -783,7 +883,7 @@ background-color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="Gas_Label">
     <property name="geometry">
      <rect>
-      <x>540</x>
+      <x>580</x>
       <y>130</y>
       <width>151</width>
       <height>21</height>
@@ -1047,7 +1147,7 @@ color: rgb(255, 255, 255);</string>
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
-   <widget class="QLCDNumber" name="NumberMeasuremenst_Lcd">
+   <widget class="QLCDNumber" name="NumberMeasurements_Lcd">
     <property name="geometry">
      <rect>
       <x>490</x>
@@ -1059,6 +1159,66 @@ color: rgb(255, 255, 255);</string>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
+   </widget>
+   <widget class="QComboBox" name="VoltageRangePlus_comboBox">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>160</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="currentIndex">
+     <number>-1</number>
+    </property>
+    <item>
+     <property name="text">
+      <string>0</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>50</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>100</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>150</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>200</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>250</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>300</string>
+     </property>
+    </item>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
