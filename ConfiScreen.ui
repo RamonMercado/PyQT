@@ -97,7 +97,7 @@
 </string>
     </property>
    </widget>
-   <widget class="QComboBox" name="MagField_comboBox">
+   <widget class="QComboBox" name="MagneticField_comboBox">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -114,7 +114,7 @@
 background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="VoltRange_comboBox">
+   <widget class="QComboBox" name="VoltageRange_comboBox">
     <property name="geometry">
      <rect>
       <x>320</x>
@@ -729,9 +729,9 @@ background-color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="MagField_Label">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>70</x>
       <y>130</y>
-      <width>161</width>
+      <width>211</width>
       <height>21</height>
      </rect>
     </property>
@@ -749,13 +749,16 @@ background-color: rgb(255, 255, 255);</string>
     <property name="text">
      <string>Magnetic Field</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QLabel" name="VoltRange_Label">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>290</x>
       <y>130</y>
-      <width>151</width>
+      <width>211</width>
       <height>21</height>
      </rect>
     </property>
@@ -773,13 +776,16 @@ background-color: rgb(255, 255, 255);</string>
     <property name="text">
      <string>Voltage Range</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QLabel" name="Gas_Label">
     <property name="geometry">
      <rect>
-      <x>590</x>
+      <x>540</x>
       <y>130</y>
-      <width>41</width>
+      <width>151</width>
       <height>21</height>
      </rect>
     </property>
@@ -797,13 +803,16 @@ background-color: rgb(255, 255, 255);</string>
     <property name="text">
      <string>Gas</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QLabel" name="VoltSweepTimes_Label">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>100</x>
       <y>240</y>
-      <width>211</width>
+      <width>271</width>
       <height>21</height>
      </rect>
     </property>
@@ -821,13 +830,16 @@ background-color: rgb(255, 255, 255);</string>
     <property name="text">
      <string>Voltage Sweep Times</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
-   <widget class="QLabel" name="NumMeasurments_Label">
+   <widget class="QLabel" name="NumMeasurements_Label">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>430</x>
       <y>240</y>
-      <width>261</width>
+      <width>281</width>
       <height>21</height>
      </rect>
     </property>
@@ -844,6 +856,9 @@ background-color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>Number of Measurements</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QPushButton" name="Run_Btn">
@@ -946,7 +961,7 @@ color: rgb(255, 255, 255);</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="UpVolt_Btn_2">
+   <widget class="QPushButton" name="UpVolt_Btn">
     <property name="geometry">
      <rect>
       <x>310</x>
@@ -990,7 +1005,7 @@ color: rgb(255, 255, 255);</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="Run_Btn_2">
+   <widget class="QPushButton" name="Graph_Btn">
     <property name="geometry">
      <rect>
       <x>490</x>
@@ -1019,7 +1034,7 @@ color: rgb(255, 255, 255);</string>
      <string>Graph</string>
     </property>
    </widget>
-   <widget class="QLCDNumber" name="lcdNumber">
+   <widget class="QLCDNumber" name="VoltageSweepTimes_Lcd">
     <property name="geometry">
      <rect>
       <x>153</x>
@@ -1028,8 +1043,11 @@ color: rgb(255, 255, 255);</string>
       <height>51</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
    </widget>
-   <widget class="QLCDNumber" name="lcdNumber_2">
+   <widget class="QLCDNumber" name="NumberMeasuremenst_Lcd">
     <property name="geometry">
      <rect>
       <x>490</x>
@@ -1037,6 +1055,9 @@ color: rgb(255, 255, 255);</string>
       <width>151</width>
       <height>51</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
   </widget>
