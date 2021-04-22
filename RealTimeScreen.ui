@@ -59,40 +59,49 @@
    <widget class="QLCDNumber" name="DebeyLength_ValueLCD">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>160</y>
-      <width>64</width>
-      <height>23</height>
+      <x>200</x>
+      <y>140</y>
+      <width>81</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
    <widget class="QLCDNumber" name="LarmorRadius_ValueLCD">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>200</x>
       <y>200</y>
-      <width>64</width>
-      <height>23</height>
+      <width>81</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
    <widget class="QLCDNumber" name="MeanFreePath_ValueLCD">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>240</y>
-      <width>64</width>
-      <height>23</height>
+      <x>200</x>
+      <y>260</y>
+      <width>81</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
    <widget class="Line" name="line_2">
     <property name="geometry">
      <rect>
       <x>550</x>
-      <y>10</y>
+      <y>20</y>
       <width>20</width>
-      <height>401</height>
+      <height>421</height>
      </rect>
     </property>
     <property name="minimumSize">
@@ -269,7 +278,7 @@
     <property name="geometry">
      <rect>
       <x>580</x>
-      <y>50</y>
+      <y>100</y>
       <width>201</width>
       <height>181</height>
      </rect>
@@ -286,14 +295,14 @@
      <rect>
       <x>30</x>
       <y>160</y>
-      <width>131</width>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Rockwell</family>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -304,20 +313,23 @@
     <property name="text">
      <string>Debye Length:</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+    </property>
    </widget>
    <widget class="QLabel" name="LarmorRadius_Label">
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>200</y>
-      <width>141</width>
+      <y>220</y>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Rockwell</family>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -333,15 +345,15 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>240</y>
-      <width>151</width>
+      <y>280</y>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Rockwell</family>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -356,8 +368,8 @@
    <widget class="QLabel" name="KTe_Label">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>240</y>
+      <x>320</x>
+      <y>280</y>
       <width>131</width>
       <height>21</height>
      </rect>
@@ -365,7 +377,7 @@
     <property name="font">
      <font>
       <family>Rockwell</family>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -380,18 +392,22 @@
    <widget class="QLCDNumber" name="KTe_eV_ValueLCD">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>430</x>
       <y>200</y>
-      <width>64</width>
-      <height>23</height>
+      <width>81</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
    <widget class="QLabel" name="KTe_eV_Label">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>200</y>
+      <x>320</x>
+      <y>220</y>
       <width>131</width>
       <height>21</height>
      </rect>
@@ -399,7 +415,7 @@
     <property name="font">
      <font>
       <family>Rockwell</family>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -414,7 +430,7 @@
    <widget class="QLabel" name="Density_Label">
     <property name="geometry">
      <rect>
-      <x>290</x>
+      <x>320</x>
       <y>160</y>
       <width>131</width>
       <height>21</height>
@@ -423,7 +439,7 @@
     <property name="font">
      <font>
       <family>Rockwell</family>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -438,36 +454,42 @@
    <widget class="QLCDNumber" name="KTe_ValueLCD">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>240</y>
-      <width>64</width>
-      <height>23</height>
+      <x>430</x>
+      <y>260</y>
+      <width>81</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
    <widget class="QLCDNumber" name="Density_ValueLCD">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>160</y>
-      <width>64</width>
-      <height>23</height>
+      <x>430</x>
+      <y>140</y>
+      <width>81</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
    <widget class="QLabel" name="PlasmaPotential_Label">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>330</y>
-      <width>151</width>
+      <x>160</x>
+      <y>350</y>
+      <width>181</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Rockwell</family>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -482,26 +504,29 @@
    <widget class="QLCDNumber" name="FloatingPotential_ValueLCD">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>330</y>
-      <width>64</width>
-      <height>23</height>
+      <x>350</x>
+      <y>390</y>
+      <width>81</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
    <widget class="QLabel" name="FloatingPotatial_Label">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>330</y>
-      <width>161</width>
+      <x>160</x>
+      <y>410</y>
+      <width>201</width>
       <height>21</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <family>Rockwell</family>
-      <pointsize>10</pointsize>
+      <pointsize>12</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
@@ -516,11 +541,14 @@
    <widget class="QLCDNumber" name="PlasmaPotential_ValueLCD">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>350</x>
       <y>330</y>
-      <width>64</width>
-      <height>23</height>
+      <width>81</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
    <widget class="QPushButton" name="RealTimeRun_Btn">
@@ -582,6 +610,27 @@ color: rgb(255, 255, 255);</string>
      <string>Stop</string>
     </property>
    </widget>
+   <zorder>PlasmaMeter_Label</zorder>
+   <zorder>line_2</zorder>
+   <zorder>label</zorder>
+   <zorder>DebyeLength_Label</zorder>
+   <zorder>LarmorRadius_Label</zorder>
+   <zorder>MeanFreePath_Label</zorder>
+   <zorder>KTe_Label</zorder>
+   <zorder>KTe_eV_Label</zorder>
+   <zorder>Density_Label</zorder>
+   <zorder>Density_ValueLCD</zorder>
+   <zorder>PlasmaPotential_Label</zorder>
+   <zorder>FloatingPotatial_Label</zorder>
+   <zorder>PlasmaPotential_ValueLCD</zorder>
+   <zorder>RealTimeRun_Btn</zorder>
+   <zorder>Stop_Btn</zorder>
+   <zorder>DebeyLength_ValueLCD</zorder>
+   <zorder>LarmorRadius_ValueLCD</zorder>
+   <zorder>MeanFreePath_ValueLCD</zorder>
+   <zorder>KTe_eV_ValueLCD</zorder>
+   <zorder>KTe_ValueLCD</zorder>
+   <zorder>FloatingPotential_ValueLCD</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -593,7 +642,6 @@ color: rgb(255, 255, 255);</string>
     </rect>
    </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources>
   <include location="../../OneDrive/Pictures/Resource.qrc"/>
