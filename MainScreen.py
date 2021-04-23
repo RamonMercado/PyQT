@@ -256,7 +256,7 @@ class Ui_Menu_Window(object):
         self.Configuration_Label.setText(_translate("Menu_Window", "Configuration: "))
         self.label_3.setText(_translate("Menu_Window", "Power by:"))
         self.PlasmaMeter_Label.setText(_translate("Menu_Window", "Plasma Meter"))
-import Resource_rc
+import resource_rc
 
 
 if __name__ == "__main__":

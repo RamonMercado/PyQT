@@ -275,7 +275,7 @@ class Ui_RealTimeMeasurement_Window(object):
         self.FloatingPotatial_Label.setText(_translate("RealTimeMeasurement_Window", "Floating Potential:"))
         self.RealTimeRun_Btn.setText(_translate("RealTimeMeasurement_Window", "Run"))
         self.Stop_Btn.setText(_translate("RealTimeMeasurement_Window", "Stop"))
-import Resource_rc
+import resource_rc
 
 
 if __name__ == "__main__":

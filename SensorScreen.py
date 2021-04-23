@@ -472,7 +472,7 @@ class Ui_Config_Window(object):
         self.VoltageRangePlus_comboBox.setItemText(4, _translate("Config_Window", "200"))
         self.VoltageRangePlus_comboBox.setItemText(5, _translate("Config_Window", "250"))
         self.VoltageRangePlus_comboBox.setItemText(6, _translate("Config_Window", "300"))
-import images_rc
+import images
 
 
 if __name__ == "__main__":
