@@ -1,17 +1,11 @@
 import numpy
 from PyQt5 import QtCore, QtGui, QtWidgets
+import pyqtgraph as pg
 from MainScreen import Ui_Menu_Window
 from SensorScreen import Ui_Config_Window
 from GraphScreen import Ui_Graphic_Window
 from RealTimeScreen import Ui_RealTimeMeasurement_Window
 import sys
-
-
-# Static function to handle back button actions
-def back_button_handler():
-    w = widget.currentWidget()
-    widget.setCurrentIndex(widget.currentIndex() - 1)
-    widget.removeWidget(w)
 
 
 class MainScreen(QtWidgets.QMainWindow, Ui_Menu_Window):
@@ -37,7 +31,7 @@ class MainScreen(QtWidgets.QMainWindow, Ui_Menu_Window):
         widget.addWidget(sensor_screen)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
-    # Creates Sensor Screen for Hyperbolic Energy Analizer
+    # Creates Sensor Screen for Hyperbolic Energy Analyzer
     def hea_button_handler(self):
         sensor_screen = SensorScreen('HEA')
         widget.addWidget(sensor_screen)
@@ -71,7 +65,7 @@ class SensorScreen(QtWidgets.QMainWindow, Ui_Config_Window):
         self.ProbeName_label.setText(text)
 
         # Button actions on click
-        self.Back_Btn.clicked.connect(back_button_handler)
+        self.Back_Btn.clicked.connect(self.back_button_handler)
         self.Run_Btn.clicked.connect(self.run_button_handler)
         self.Graph_Btn.clicked.connect(self.graph_button_handler)
         self.DownVolt_Btn.clicked.connect(self.decrease_sweep_time)
@@ -121,6 +115,11 @@ class SensorScreen(QtWidgets.QMainWindow, Ui_Config_Window):
         self.sweepTime = numpy.round(self.sweepTime, 2)
         self.VoltageSweepTimes_Lcd.display('%.2f' % self.sweepTime)
 
+    def back_button_handler(self):
+        w = widget.currentWidget()
+        widget.setCurrentIndex(widget.currentIndex() - 1)
+        widget.removeWidget(w)
+
     # Displays Real Time Screen
     def run_button_handler(self):
         self.minus_voltage = self.VoltageRangeMinus_comboBox.currentText()
@@ -131,10 +130,13 @@ class SensorScreen(QtWidgets.QMainWindow, Ui_Config_Window):
            (self.minus_voltage == '0' and self.plus_voltage == '0'):
             self.dlg.exec_()
 
-        # Else go to Real Time Screen
+        # Else create real time and graph screen
+        # Go to real time screen
         else:
             real_time_screen = RealTimeScreen()
+            graph_screen = GraphicScreen()
             widget.addWidget(real_time_screen)
+            widget.addWidget(graph_screen)
             widget.setCurrentIndex(widget.currentIndex() + 1)
 
     # Displays Graph Screen
@@ -150,11 +152,11 @@ class RealTimeScreen(QtWidgets.QMainWindow, Ui_RealTimeMeasurement_Window):
         super(RealTimeScreen, self).__init__()
         self.setupUi(self)
 
-        # Hide Stop button on startup
-        self.Stop_Btn.hide()
+        # Hide Run button on startup
+        self.RealTimeRun_Btn.hide()
 
         # Button actions on click
-        self.RealTimeRun_Btn.clicked.connect(self.run_button_handler)
+        # self.RealTimeRun_Btn.clicked.connect(self.run_button_handler)
         self.Stop_Btn.clicked.connect(self.stop_button_handler)
 
     # Starts graph generation? Correct me on this
@@ -165,9 +167,11 @@ class RealTimeScreen(QtWidgets.QMainWindow, Ui_RealTimeMeasurement_Window):
 
     # Stops graph generation
     def stop_button_handler(self):
-        self.Stop_Btn.hide()
         # Stop Measurements
-        self.RealTimeRun_Btn.show()
+        pass
+
+    def graph_button_handler(self):
+        widget.setCurrentIndex(widget.currentIndex() + 1)
 
 
 class GraphicScreen(QtWidgets.QMainWindow, Ui_Graphic_Window):
@@ -183,9 +187,19 @@ class GraphicScreen(QtWidgets.QMainWindow, Ui_Graphic_Window):
         # Button action on click
         self.BackGraph_Btn.clicked.connect(self.back_button_handler)
 
-        # PLot graph from values
-        self.Graph_Widget.plot(hour, temperature)
+        # Set Graph Styling
+        self.Graph_Widget.setBackground('w')
+        pen = pg.mkPen(color=(255, 0, 0))  # (255, 0, 0) is red
+        self.Graph_Widget.setTitle('<span style=\"color:black;font-size:20pt\">Voltage vs Current Characteristic</span>')
+        self.Graph_Widget.setLabel('left', '<span style=\"color:black;font-size:20px\">Current (I)</span>')
+        self.Graph_Widget.setLabel('bottom', '<span style=\"color:black;font-size:20px\">Voltage (V)</span>')
 
+        # PLot graph from values
+        self.Graph_Widget.plot(hour, temperature, pen=pen)
+
+
+    def back_button_handler(self):
+        widget.setCurrentIndex(widget.currentIndex() - 1)
 
 class InvalidVoltageRangeDialogBox(QtWidgets.QDialog):
     def __init__(self):
