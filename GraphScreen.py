@@ -22,7 +22,7 @@ class Ui_Graphic_Window(object):
         self.centralwidget = QtWidgets.QWidget(Graphic_Window)
         self.centralwidget.setObjectName("centralwidget")
         self.Graph_Widget = PlotWidget(self.centralwidget)
-        self.Graph_Widget.setGeometry(QtCore.QRect(30, 0, 741, 401))
+        self.Graph_Widget.setGeometry(QtCore.QRect(30, 30, 741, 361))
         self.Graph_Widget.setObjectName("Graph_Widget")
         self.BackGraph_Btn = QtWidgets.QPushButton(self.centralwidget)
         self.BackGraph_Btn.setGeometry(QtCore.QRect(340, 410, 111, 41))
@@ -38,7 +38,7 @@ class Ui_Graphic_Window(object):
         self.BackGraph_Btn.setObjectName("BackGraph_Btn")
         Graphic_Window.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Graphic_Window)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
         self.menubar.setObjectName("menubar")
         Graphic_Window.setMenuBar(self.menubar)
 

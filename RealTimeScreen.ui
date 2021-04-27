@@ -59,40 +59,49 @@
    <widget class="QLCDNumber" name="DebeyLength_ValueLCD">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>170</x>
       <y>140</y>
-      <width>81</width>
+      <width>121</width>
       <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="digitCount">
+     <number>7</number>
     </property>
    </widget>
    <widget class="QLCDNumber" name="LarmorRadius_ValueLCD">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>170</x>
       <y>200</y>
-      <width>81</width>
+      <width>121</width>
       <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="digitCount">
+     <number>7</number>
     </property>
    </widget>
    <widget class="QLCDNumber" name="MeanFreePath_ValueLCD">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>170</x>
       <y>260</y>
-      <width>81</width>
+      <width>121</width>
       <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="digitCount">
+     <number>7</number>
     </property>
    </widget>
    <widget class="Line" name="line_2">
@@ -295,7 +304,7 @@
      <rect>
       <x>30</x>
       <y>160</y>
-      <width>181</width>
+      <width>121</width>
       <height>21</height>
      </rect>
     </property>
@@ -322,7 +331,7 @@
      <rect>
       <x>30</x>
       <y>220</y>
-      <width>181</width>
+      <width>131</width>
       <height>21</height>
      </rect>
     </property>
@@ -346,7 +355,7 @@
      <rect>
       <x>30</x>
       <y>280</y>
-      <width>181</width>
+      <width>131</width>
       <height>21</height>
      </rect>
     </property>
@@ -392,15 +401,18 @@
    <widget class="QLCDNumber" name="KTe_eV_ValueLCD">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>400</x>
       <y>200</y>
-      <width>81</width>
+      <width>121</width>
       <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">
 background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="digitCount">
+     <number>7</number>
     </property>
    </widget>
    <widget class="QLabel" name="KTe_eV_Label">
@@ -454,27 +466,33 @@ background-color: rgb(255, 255, 255);</string>
    <widget class="QLCDNumber" name="KTe_ValueLCD">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>400</x>
       <y>260</y>
-      <width>81</width>
+      <width>121</width>
       <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="digitCount">
+     <number>7</number>
     </property>
    </widget>
    <widget class="QLCDNumber" name="Density_ValueLCD">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>400</x>
       <y>140</y>
-      <width>81</width>
+      <width>121</width>
       <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="digitCount">
+     <number>7</number>
     </property>
    </widget>
    <widget class="QLabel" name="PlasmaPotential_Label">
@@ -504,14 +522,17 @@ background-color: rgb(255, 255, 255);</string>
    <widget class="QLCDNumber" name="FloatingPotential_ValueLCD">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>320</x>
       <y>390</y>
-      <width>81</width>
+      <width>121</width>
       <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="digitCount">
+     <number>7</number>
     </property>
    </widget>
    <widget class="QLabel" name="FloatingPotatial_Label">
@@ -541,45 +562,20 @@ background-color: rgb(255, 255, 255);</string>
    <widget class="QLCDNumber" name="PlasmaPotential_ValueLCD">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>320</x>
       <y>330</y>
-      <width>81</width>
+      <width>121</width>
       <height>41</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
-   </widget>
-   <widget class="QPushButton" name="RealTimeRun_Btn">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>290</y>
-      <width>121</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Rockwell</family>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background-color: rgb(97, 177, 90);
-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>Run</string>
+    <property name="digitCount">
+     <number>7</number>
     </property>
    </widget>
-   <widget class="QPushButton" name="Stop_Btn">
+   <widget class="QPushButton" name="Back_Btn">
     <property name="geometry">
      <rect>
       <x>620</x>
@@ -607,7 +603,36 @@ color: rgb(255, 255, 255);</string>
      <set>Qt::ImhNone</set>
     </property>
     <property name="text">
-     <string>Stop</string>
+     <string>Back</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Graph_Btn">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>360</y>
+      <width>121</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Rockwell</family>
+      <pointsize>12</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">
+background-color: rgb(255, 170, 0);
+color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Graph</string>
     </property>
    </widget>
    <zorder>PlasmaMeter_Label</zorder>
@@ -623,14 +648,14 @@ color: rgb(255, 255, 255);</string>
    <zorder>PlasmaPotential_Label</zorder>
    <zorder>FloatingPotatial_Label</zorder>
    <zorder>PlasmaPotential_ValueLCD</zorder>
-   <zorder>RealTimeRun_Btn</zorder>
-   <zorder>Stop_Btn</zorder>
+   <zorder>Back_Btn</zorder>
    <zorder>DebeyLength_ValueLCD</zorder>
    <zorder>LarmorRadius_ValueLCD</zorder>
    <zorder>MeanFreePath_ValueLCD</zorder>
    <zorder>KTe_eV_ValueLCD</zorder>
    <zorder>KTe_ValueLCD</zorder>
    <zorder>FloatingPotential_ValueLCD</zorder>
+   <zorder>Graph_Btn</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -638,7 +663,7 @@ color: rgb(255, 255, 255);</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

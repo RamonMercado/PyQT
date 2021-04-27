@@ -1,10 +1,15 @@
+import threading
 import numpy
 from PyQt5 import QtCore, QtGui, QtWidgets
 import pyqtgraph as pg
-from MainScreen import Ui_Menu_Window
+from MenuScreen import Ui_Menu_Window
 from SensorScreen import Ui_Config_Window
 from GraphScreen import Ui_Graphic_Window
 from RealTimeScreen import Ui_RealTimeMeasurement_Window
+from HistoryScreen import Ui_HistoryScreen
+from plasma_meter import run_example, server
+from plasma_meter.server import DataServer
+from plasma_meter.database import DatabaseManager
 import sys
 
 
@@ -18,6 +23,7 @@ class MainScreen(QtWidgets.QMainWindow, Ui_Menu_Window):
         self.SLP_Btn.clicked.connect(self.slp_button_handler)
         self.DLP_Btn.clicked.connect(self.dlp_button_handler)
         self.HEA_Btn.clicked.connect(self.hea_button_handler)
+        self.History_Btn.clicked.connect(self.history_button_handler)
 
     # Creates Sensor Screen for Single Langmuir Probe
     def slp_button_handler(self):
@@ -37,15 +43,18 @@ class MainScreen(QtWidgets.QMainWindow, Ui_Menu_Window):
         widget.addWidget(sensor_screen)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
+    # Shows History Screen
+    def history_button_handler(self):
+        history_screen = HistoryScreen()
+        widget.addWidget(history_screen)
+        widget.setCurrentIndex(widget.currentIndex() + 1)
+
 
 class SensorScreen(QtWidgets.QMainWindow, Ui_Config_Window):
 
     def __init__(self, sensor_name: str):
         super(SensorScreen, self).__init__()
         self.setupUi(self)
-
-        # Initialize invalid voltage range dialog screen
-        self.dlg = InvalidVoltageRangeDialogBox()
 
         # Initialize variables
         self.name = sensor_name
@@ -67,7 +76,6 @@ class SensorScreen(QtWidgets.QMainWindow, Ui_Config_Window):
         # Button actions on click
         self.Back_Btn.clicked.connect(self.back_button_handler)
         self.Run_Btn.clicked.connect(self.run_button_handler)
-        self.Graph_Btn.clicked.connect(self.graph_button_handler)
         self.DownVolt_Btn.clicked.connect(self.decrease_sweep_time)
         self.UpVolt_Btn.clicked.connect(self.increase_sweep_time)
         self.UpNumberMeasurements_Btn.clicked.connect(self.increase_number_of_measurements)
@@ -128,36 +136,49 @@ class SensorScreen(QtWidgets.QMainWindow, Ui_Config_Window):
         # If either are empty or both are 0 show invalid voltage range dialog
         if (self.minus_voltage == '' or self.plus_voltage == '') or \
            (self.minus_voltage == '0' and self.plus_voltage == '0'):
+
+            # Initialize invalid voltage range dialog screen
+            self.dlg = InvalidParameterDialogBox('Voltage Range')
+            self.dlg.exec_()
+
+        elif self.VoltageSweepTimes_Lcd.value() == 0:
+
+            # Initialize invalid voltage sweep time dialog screen
+            self.dlg = InvalidParameterDialogBox('Sweep Time')
+            self.dlg.exec_()
+
+        elif self.NumberMeasurements_Lcd.value() == 0:
+
+            # Initialize invalid number of measurements dialog screen
+            self.dlg = InvalidParameterDialogBox('Number of Measurements')
             self.dlg.exec_()
 
         # Else create real time and graph screen
         # Go to real time screen
         else:
-            real_time_screen = RealTimeScreen()
-            graph_screen = GraphicScreen()
+            self.Worker1 = Worker1()
+            self.Worker1.start()
+            real_time_screen = RealTimeScreen(self.Worker1)
+            graph_screen = GraphicScreen(self.Worker1)
             widget.addWidget(real_time_screen)
             widget.addWidget(graph_screen)
             widget.setCurrentIndex(widget.currentIndex() + 1)
 
-    # Displays Graph Screen
-    def graph_button_handler(self):
-        graph_screen = GraphicScreen()
-        widget.addWidget(graph_screen)
-        widget.setCurrentIndex(widget.currentIndex() + 1)
-
 
 class RealTimeScreen(QtWidgets.QMainWindow, Ui_RealTimeMeasurement_Window):
-
-    def __init__(self):
+    #  voltage_range, voltage_sweep_time, number_of_measurements, sensor_to_use, gas
+    def __init__(self, worker):
         super(RealTimeScreen, self).__init__()
         self.setupUi(self)
 
-        # Hide Run button on startup
-        self.RealTimeRun_Btn.hide()
+        # Run measurement
+
+        worker.real_time_value_update.connect(self.values_update)
 
         # Button actions on click
         # self.RealTimeRun_Btn.clicked.connect(self.run_button_handler)
-        self.Stop_Btn.clicked.connect(self.stop_button_handler)
+        self.Back_Btn.clicked.connect(self.back_button_handler)
+        self.Graph_Btn.clicked.connect(self.graph_button_handler)
 
     # Starts graph generation? Correct me on this
     def run_button_handler(self):
@@ -166,20 +187,36 @@ class RealTimeScreen(QtWidgets.QMainWindow, Ui_RealTimeMeasurement_Window):
         self.Stop_Btn.show()
 
     # Stops graph generation
-    def stop_button_handler(self):
-        # Stop Measurements
-        pass
+    def back_button_handler(self):
+        #Stop measurements
+        w1 = widget.currentWidget()
+        w2 = widget.widget(widget.currentIndex() + 1)
+        widget.setCurrentIndex(widget.currentIndex() - 1)
+        widget.removeWidget(w2)
+        widget.removeWidget(w1)
+
 
     def graph_button_handler(self):
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
+    def values_update(self, debye_length, density, lamor_radius, temperature_ev, mean_free_path, temperature, plasma_potential, floating_potential):
+        self.DebeyLength_ValueLCD.display('%.2f' % debye_length)
+        self.Density_ValueLCD.display('%.2f' % density)
+        self.LarmorRadius_ValueLCD.display('%.2f' % lamor_radius)
+        self.KTe_eV_ValueLCD.display('%.2f' % temperature_ev)
+        self.MeanFreePath_ValueLCD.display('%.2f' % mean_free_path)
+        self.KTe_ValueLCD.display('%.2f' % temperature)
+        self.PlasmaPotential_ValueLCD.display('%.2f' % plasma_potential)
+        self.FloatingPotential_ValueLCD.display('%.2f' % floating_potential)
+
 
 class GraphicScreen(QtWidgets.QMainWindow, Ui_Graphic_Window):
 
-    def __init__(self):
+    def __init__(self, worker):
         super(GraphicScreen, self).__init__()
         self.setupUi(self)
 
+        worker.graph_update.connect(self.graph_update)
         # Test values
         hour = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         temperature = [30, 32, 34, 32, 33, 31, 29, 32, 35, 45]
@@ -189,24 +226,135 @@ class GraphicScreen(QtWidgets.QMainWindow, Ui_Graphic_Window):
 
         # Set Graph Styling
         self.Graph_Widget.setBackground('w')
-        pen = pg.mkPen(color=(255, 0, 0))  # (255, 0, 0) is red
+
         self.Graph_Widget.setTitle('<span style=\"color:black;font-size:20pt\">Voltage vs Current Characteristic</span>')
         self.Graph_Widget.setLabel('left', '<span style=\"color:black;font-size:20px\">Current (I)</span>')
         self.Graph_Widget.setLabel('bottom', '<span style=\"color:black;font-size:20px\">Voltage (V)</span>')
-
-        # PLot graph from values
-        self.Graph_Widget.plot(hour, temperature, pen=pen)
-
+        self.Graph_Widget.showGrid(x=True, y=True)
 
     def back_button_handler(self):
         widget.setCurrentIndex(widget.currentIndex() - 1)
 
-class InvalidVoltageRangeDialogBox(QtWidgets.QDialog):
+    def graph_update(self, voltage_list, current_list):
+        # PLot graph from values
+        pen = pg.mkPen(color=(255, 0, 0))  # (255, 0, 0) is red
+        self.Graph_Widget.plot(voltage_list[:len(current_list)], current_list, pen=pen)
+
+
+class HistoryScreen(QtWidgets.QMainWindow, Ui_HistoryScreen):
     def __init__(self):
-        super(InvalidVoltageRangeDialogBox, self).__init__()
+        super(HistoryScreen, self).__init__()
+        self.setupUi(self)
+
+        self.Back_Btn.clicked.connect(self.back_button_handler)
+        self.Filter_Combobox.currentTextChanged.connect(self.display_data)
+        self.db = DatabaseManager()
+        self.display_data()
+
+    def display_data(self):
+        if self.Filter_Combobox.currentText() == 'All':
+            self.display_all_measurements()
+
+        elif self.Filter_Combobox.currentText() == 'SLP':
+            self.display_slp_measurements()
+
+        elif self.Filter_Combobox.currentText() == 'DLP':
+            self.display_dlp_measurements()
+
+        elif self.Filter_Combobox.currentText() == 'HEA':
+            self.display_hea_measurements()
+
+    def back_button_handler(self):
+        w = widget.currentWidget()
+        widget.setCurrentIndex(widget.currentIndex() - 1)
+        widget.removeWidget(w)
+
+    def display_all_measurements(self):
+
+        self.Single_History_TableWidget.hide()
+        results = self.db.get_all_measurements()
+
+        self.All_History_TableWidget.setRowCount(0)
+        for row_number, row_data in enumerate(results):
+            self.All_History_TableWidget.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.All_History_TableWidget.setItem(row_number, column_number,
+                                                     QtWidgets.QTableWidgetItem(str(row_data[data])))
+
+        for i in range(self.All_History_TableWidget.columnCount()):
+            self.All_History_TableWidget.resizeColumnToContents(i)
+
+        self.All_History_TableWidget.show()
+
+    def display_slp_measurements(self):
+
+        self.All_History_TableWidget.hide()
+        results = self.db.get_all_SLP_measurements()
+
+        self.Single_History_TableWidget.setRowCount(0)
+        for row_number, row_data in enumerate(results):
+            self.Single_History_TableWidget.insertRow(row_number)
+            for column_number, data in enumerate(row_data):
+                self.Single_History_TableWidget.setItem(row_number, column_number,
+                                                     QtWidgets.QTableWidgetItem(str(row_data[data])))
+
+        for i in range(self.All_History_TableWidget.columnCount()):
+            self.Single_History_TableWidget.resizeColumnToContents(i)
+
+        self.Single_History_TableWidget.show()
+
+    def display_dlp_measurements(self):
+        # self.All_History_TableWidget.hide()
+        # results = self.db.get_all_DLP_measurements()
+        #
+        # self.Single_History_TableWidget.setRowCount(0)
+        # for row_number, row_data in enumerate(results):
+        #     self.Single_History_TableWidget.insertRow(row_number)
+        #     for column_number, data in enumerate(row_data):
+        #         self.Single_History_TableWidget.setItem(row_number, column_number,
+        #                                                 QtWidgets.QTableWidgetItem(str(row_data[data])))
+        #
+        # for i in range(self.All_History_TableWidget.columnCount()):
+        #     self.Single_History_TableWidget.resizeColumnToContents(i)
+        #
+        # self.Single_History_TableWidget.show()
+        pass
+
+    def display_hea_measurements(self):
+        # self.All_History_TableWidget.hide()
+        # results = self.db.get_all_HEA_measurements()
+        #
+        # self.Single_History_TableWidget.setRowCount(0)
+        # for row_number, row_data in enumerate(results):
+        #     self.Single_History_TableWidget.insertRow(row_number)
+        #     for column_number, data in enumerate(row_data):
+        #         self.Single_History_TableWidget.setItem(row_number, column_number,
+        #                                                 QtWidgets.QTableWidgetItem(str(row_data[data])))
+        #
+        # for i in range(self.All_History_TableWidget.columnCount()):
+        #     self.Single_History_TableWidget.resizeColumnToContents(i)
+        #
+        # self.Single_History_TableWidget.show()
+        pass
+
+class InvalidParameterDialogBox(QtWidgets.QDialog):
+    def __init__(self, error_type):
+        super(InvalidParameterDialogBox, self).__init__()
+
+        if error_type == 'Voltage Range':
+            self.title = 'Invalid Voltage Range!'
+            self.message = 'Please choose a valid voltage range'
+
+        elif error_type == 'Number of Measurements':
+            self.title = 'Invalid Number of Measurements!'
+            self.message = 'Please choose a valid number of measurements'
+
+        elif error_type == 'Sweep Time':
+            self.title = 'Invalid Voltage Sweep Time!'
+            self.message = 'Please choose a valid voltage sweep time'
 
         # Set title on window
-        self.setWindowTitle('Invalid Voltage Range!')
+        self.setWindowTitle(self.title)
 
         # Set buttons to include in dialog box
         # Set Ok button
@@ -220,21 +368,43 @@ class InvalidVoltageRangeDialogBox(QtWidgets.QDialog):
         self.layout = QtWidgets.QVBoxLayout()
 
         # Set Message included in dialog box
-        message = QtWidgets.QLabel('Please choose a valid voltage range')
+        box_message = QtWidgets.QLabel(self.message)
 
         # Add message and buttons to layout
-        self.layout.addWidget(message)
+        self.layout.addWidget(box_message)
         self.layout.addWidget(self.buttonBox)
 
         # Set layout
         self.setLayout(self.layout)
 
         # Set fixed size
-        self.setFixedWidth(300)
+        self.setFixedWidth(400)
         self.setFixedHeight(100)
 
 
+class Worker1(QtCore.QThread):
+    real_time_value_update = QtCore.pyqtSignal(float, float, float, float, float, float, float, float)
+    graph_update = QtCore.pyqtSignal(list, list)
+
+    def run(self):
+        run_example.run_in_separate_thread([-300, 300], .5, 500, 'SLP', 'Air',
+                                           self.real_time_value_update, self.graph_update)
+        self.quit()
+
+
+def run_server():
+    """
+    Runs plasma server indefinitely
+    :return: None
+    """
+    data_server = DataServer()
+    data_server.start_server_task()
+
 if __name__ == '__main__':
+    # making server thread
+    server = threading.Thread(target=run_server)
+    server.start()
+
     app = QtWidgets.QApplication(sys.argv)
     widget = QtWidgets.QStackedWidget()
     main_screen = MainScreen()

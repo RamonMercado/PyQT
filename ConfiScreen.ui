@@ -86,7 +86,7 @@
     <property name="font">
      <font>
       <family>Rockwell</family>
-      <pointsize>12</pointsize>
+      <pointsize>18</pointsize>
      </font>
     </property>
     <property name="focusPolicy">
@@ -135,7 +135,7 @@
     <property name="font">
      <font>
       <family>Rockwell</family>
-      <pointsize>12</pointsize>
+      <pointsize>18</pointsize>
       <weight>50</weight>
       <bold>false</bold>
      </font>
@@ -170,7 +170,7 @@ background-color: rgb(255, 255, 255);</string>
     <property name="font">
      <font>
       <family>Rockwell</family>
-      <pointsize>12</pointsize>
+      <pointsize>18</pointsize>
      </font>
     </property>
     <property name="focusPolicy">
@@ -964,7 +964,7 @@ background-color: rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="Run_Btn">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>410</x>
       <y>360</y>
       <width>111</width>
       <height>41</height>
@@ -992,7 +992,7 @@ color: rgb(255, 255, 255);</string>
    <widget class="QPushButton" name="Back_Btn">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>270</x>
       <y>360</y>
       <width>111</width>
       <height>41</height>
@@ -1105,35 +1105,6 @@ color: rgb(255, 255, 255);</string>
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="Graph_Btn">
-    <property name="geometry">
-     <rect>
-      <x>490</x>
-      <y>360</y>
-      <width>111</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Rockwell</family>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="focusPolicy">
-     <enum>Qt::NoFocus</enum>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">
-background-color: rgb(255, 170, 0);
-color: rgb(255, 255, 255);</string>
-    </property>
-    <property name="text">
-     <string>Graph</string>
-    </property>
-   </widget>
    <widget class="QLCDNumber" name="VoltageSweepTimes_Lcd">
     <property name="geometry">
      <rect>
@@ -1172,7 +1143,7 @@ color: rgb(255, 255, 255);</string>
     <property name="font">
      <font>
       <family>Rockwell</family>
-      <pointsize>12</pointsize>
+      <pointsize>18</pointsize>
      </font>
     </property>
     <property name="focusPolicy">
@@ -1227,7 +1198,7 @@ color: rgb(255, 255, 255);</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
